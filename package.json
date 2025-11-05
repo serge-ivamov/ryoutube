@@ -1,0 +1,41 @@
+{
+  "name": "RYouTube",
+  "version": "1.0.0",
+  "description": "YouTube browser for RUNet.",
+  "keywords": [
+    "youtube"
+  ],
+  "license": "BSD-3-Clause",
+  "author": "Serge Ivamov",
+  "type": "youtube",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "ru.ares.ryoutube",
+    "productName": "RYouTube",
+    "copyright": "Copyright © 2025 ${author}",
+    "files": [
+      "src/main.js",
+      "src/preload.js",
+      "src/renderer.js",
+      "html/styles.css",
+      "html/index.html",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "img/RYouTubeAppIcon.icns",
+      "category": "public.app-category.video",
+      "hardenedRuntime": true
+    },
+    "win": {
+      "icon": "img/RYouTubeAppIcon.png"
+    }
+  },
+  "devDependencies": {
+    "electron": "^38.5.0",
+    "electron-builder": "^26.0.12"
+  }
+}

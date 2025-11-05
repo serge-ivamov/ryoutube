@@ -1,0 +1,12 @@
+# macos
+.DS_Store
+Icon
+._*
+
+# Dependencies
+/node_modules
+
+# Build artifacts
+/package-lock.json
+/dist
+*.dmg
