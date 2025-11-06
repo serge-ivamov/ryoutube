@@ -6,7 +6,7 @@ body {
     overflow: hidden; /* Предотвращает прокрутку основного окна */
 }
 
-.navigation-bar {
+#nav-bar {
     display: flex;
     align-items: center;
     padding: 10px;

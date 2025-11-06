@@ -5,6 +5,7 @@ const path = require('path');
 const startURL = 'https://serge-ivamov.github.io/ryoutube-home/';
 
 function createWindow() {
+  const navbarHeight = 60;
   const win = new BrowserWindow({
     width: 1000,
     height: 800,
@@ -29,19 +30,7 @@ function createWindow() {
   }); // BrowserView()
   
   win.setBrowserView(view);
-  
-  // Определяем размеры и положение BrowserView
-  const resizeView = () => {
-    const bounds = win.getBounds();
-    // Высота навигационной панели 60px
-    view.setBounds({ x: 0, y: 60, width: bounds.width, height: bounds.height - 60 });
-  };
-
-  win.on('resize', resizeView);
-  resizeView();
-
   view.webContents.loadURL(startURL);
-
   const { ipcMain } = require('electron');
 
   ipcMain.on('navigate', (event, url) => {
@@ -60,24 +49,47 @@ function createWindow() {
   // Обновляем строку URL в интерфейсе при навигации
   view.webContents.on('did-navigate', (event, url) => { win.webContents.send('update-url', url); });
   view.webContents.on('did-finish-load', () => { win.webContents.send('update-url', view.webContents.getURL()); });
+
+  // Определяем размеры и положение BrowserView
+  const resizeView = () => {
+    const { width, height } = win.getBounds();
+    if (win.isFullScreen()) { view.setBounds({ x: 0, y: 0, width: width, height: height }); }
+    else { view.setBounds({ x: 0, y: navbarHeight, width: width, height: height - navbarHeight }); }
+  };
+
+  // Обработчик изменения размеров окна для обновления размеров view
+  win.on('resize', resizeView);
+  resizeView();
+
+  // Обработчик полноэкранного режима
+  win.on('enter-full-screen', () => {
+    win.webContents.send('toggle-nav', false);
+    const { width, height } = win.getBounds();
+    view.setBounds({ x: 0, y: 0, width: width, height: height }); 
+  });
+
+  win.on('leave-full-screen', () => {
+    win.webContents.send('toggle-nav', true);
+    const { width, height } = win.getBounds();
+    view.setBounds({ x: 0, y: navbarHeight, width: width, height: height - navbarHeight }); 
+  });
+
 } // createWindow()
 
 function addAboutMenuItem() {
   const currentMenu = Menu.getApplicationMenu();
   if (!currentMenu) { console.error('No menu.'); return; }
   let helpMenu = currentMenu.items.find(item => {
-      return item.role === 'help' || item.label === 'Помощь' || item.label === 'Help';
+    return item.role === 'help' || item.label === 'Помощь' || item.label === 'Help';
   });
   if (!helpMenu) {
     helpMenu = new MenuItem({ label: 'Помощь', submenu: [] });
     currentMenu.items.push(helpMenu);
   }
-  // Добавляем новый пункт "О программе" в подменю "Помощь"
   helpMenu.submenu.append(new MenuItem({ label: 'О программе', role: 'about' }));
   Menu.setApplicationMenu(currentMenu);
 } // addAboutMenuItem()
 
-//app.whenReady().then(createWindow);
 app.whenReady().then(() => {
   const { app } = require('electron');
   app.commandLine.appendSwitch('no-proxy-server');
@@ -85,7 +97,7 @@ app.whenReady().then(() => {
     app.commandLine.appendSwitch('proxy-server');
     app.commandLine.appendSwitch('headless');
   }
-  addAboutMenuItem();
+  if (process.platform == 'win32') { addAboutMenuItem(); } // Добавляем пункт "О программе" в подменю "Помощь"
   createWindow();
 }); // app.whenReady()
 

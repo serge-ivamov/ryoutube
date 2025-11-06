@@ -1,6 +1,6 @@
 {
   "name": "RYouTube",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "YouTube browser for RUNet.",
   "keywords": [
     "youtube"
@@ -10,7 +10,8 @@
   "type": "youtube",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "startrace": "electron --trace-warnings ."
   },
   "build": {
     "appId": "ru.ares.ryoutube",
@@ -31,7 +32,7 @@
       "hardenedRuntime": true
     },
     "win": {
-      "icon": "img/RYouTubeAppIcon.png"
+      "icon": "img/RYouTubeAppIcon.ico"
     }
   },
   "devDependencies": {

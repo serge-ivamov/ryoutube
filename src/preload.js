@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   reload: () => ipcRenderer.send('reload'),
   stop: () => ipcRenderer.send('stop'),
   goYoutube: () => ipcRenderer.send('go-youtube'),
-  handleUrlUpdate: (callback) => ipcRenderer.on('update-url', (event, url) => callback(url))
+  handleUrlUpdate: (callback) => ipcRenderer.on('update-url', (event, url) => callback(url)),
+  handleToggleNav: (callback) => ipcRenderer.on('toggle-nav', (event, isVisible) => callback(isVisible))
 });
 
