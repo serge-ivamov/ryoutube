@@ -1,6 +1,6 @@
 {
   "name": "RYouTube",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "YouTube browser for RUNet.",
   "keywords": [
     "youtube"
@@ -16,7 +16,7 @@
   "build": {
     "appId": "ru.ares.ryoutube",
     "productName": "RYouTube",
-    "copyright": "Copyright © 2025 ${author}",
+    "copyright": "Copyright © 2025-2026 ${author}",
     "files": [
       "src/main.js",
       "src/preload.js",
@@ -33,10 +33,11 @@
     },
     "win": {
       "icon": "img/RYouTubeAppIcon.ico"
-    }
+    },
+    "electronVersion": "40.9.3"
   },
   "devDependencies": {
-    "electron": "^38.5.0",
+    "electron": "40.9.3",
     "electron-builder": "^26.0.12"
   }
 }
