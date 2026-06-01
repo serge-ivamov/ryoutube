@@ -6,7 +6,7 @@ YouTube browser for RUNet.
 - v1.0.1 Добавлено автоматическое скрытие навигационной панели в полноэкранном режиме.
 
 ##### Download v1.0.3
-- [MacOS 12+ (Monterey)](https://github.com/serge-ivamov/ryoutube/releases/download/v1.0.2/RYouTube.1.0.3.dmg)
+- [MacOS 12+ (Monterey)](https://github.com/serge-ivamov/ryoutube/releases/download/v1.0.3/RYouTube.1.0.3.dmg)
 - [Windows 10+](https://github.com/serge-ivamov/ryoutube/releases/download/v1.0.3/RYouTube.Setup.1.0.3.exe)
 - [Windows 10+](https://github.com/serge-ivamov/ryoutube/releases/download/v1.0.3/RYouTube.1.0.3.exe) Portable
 
